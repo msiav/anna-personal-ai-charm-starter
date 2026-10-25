@@ -19,13 +19,5 @@ jobs:
       - name: Select Xcode 26.3
         run: sudo xcode-select -s /Applications/Xcode_26.3.app
 
-      - name: Extract the starter source
-        run: unzip -q anna-personal-ai-charm-source.zip -d source
-
-      - name: Run shared-core tests
-        working-directory: source
-        run: swift test
-
-      - name: Build iPhone and Watch simulator app
-        working-directory: source
-        run: bash scripts/build-simulator.sh
+      - name: Test and build iPhone plus Watch simulator app
+        run: bash build.sh
