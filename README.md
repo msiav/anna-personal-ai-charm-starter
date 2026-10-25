@@ -13,17 +13,18 @@ The complete project folder is in [`anna-personal-ai-charm-source.zip`](anna-per
 
 This is a source-code starter, not a finished service or a promise of production readiness. Model speed, memory use, supported devices, and permissions vary. Test on the devices you plan to support.
 
-## Build the iPhone and Watch apps
+## Build and run
 
-1. Open `AnnaCharmWatch.xcodeproj` in Xcode.
-2. Choose the `AnnaWatchContainer` scheme and sign in with your own Apple Developer team.
-3. Set unique bundle identifiers for the iPhone app, Watch app, widgets, and share extension.
-4. If you want iCloud sync or shared app-group storage, create your own CloudKit container and App Group, enable the matching capabilities for each target, and update the example identifiers in the project and entitlement files. Without your own setup, those integrations will not work.
-5. Build and test on an iPhone paired with a Watch. The first model download requires internet access. Review the model card and its license before distributing a build.
+Requirements: a Mac with Xcode 16.4 or newer and internet access for Swift Package Manager and the first model download. The sample targets iOS 18.5 and watchOS 10 or newer. Model weights are downloaded separately by the app.
 
-The Xcode project uses a pinned Swift Package dependency. Xcode resolves it when the project is opened or built.
+1. Download and extract the source archive.
+2. Quit Xcode, open Terminal in the extracted folder, and run `bash scripts/build-simulator.sh`. The first build resolves the NobodyWho package and its native framework, so it may take several minutes.
+3. After the script succeeds, open `AnnaCharmWatch.xcodeproj`, choose the `AnnaWatchContainer` scheme, select an iPhone simulator, and press Run.
+4. For a physical device, configure your own signing team and bundle identifiers. Optional iCloud sync and shared app-group storage require your own containers, capabilities, and matching identifiers.
 
-Build note: the standalone core test suite passes in this checkout. The full Xcode app build currently depends on NobodyWho 2.3.0 and its SwiftSyntax macro toolchain compatibility. Verify an iPhone and Watch build with your Xcode version before building on this starter.
+The script uses a project-local DerivedData folder and applies Apple's [documented Xcode 26 workaround](https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes): disabling SwiftSyntax macro prebuilts. It changes the current Mac user's Xcode preference and leaves it disabled. Restore Xcode's default with `defaults delete com.apple.dt.Xcode IDEPackageEnablePrebuilts`. The script builds the iPhone app and its embedded Watch app for the simulator without signing. It does not configure device provisioning or prove real-device behavior.
+
+Run `swift test` from the extracted folder to test the shared core without Xcode.
 
 ## Make the character yours
 
