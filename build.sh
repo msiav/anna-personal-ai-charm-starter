@@ -41,8 +41,8 @@ echo "Running the shared-core tests..."
 echo "Resolving Swift packages..."
 xcodebuild     -resolvePackageDependencies     -project "$PROJECT"     -scheme AnnaWatchContainer     -derivedDataPath "$DERIVED_DATA"
 
-echo "Building Anna for the iOS Simulator..."
-xcodebuild     -project "$PROJECT"     -scheme AnnaWatchContainer     -destination "generic/platform=iOS Simulator"     -derivedDataPath "$DERIVED_DATA"     -skipMacroValidation     CODE_SIGNING_ALLOWED=NO     build
+echo "Building Anna for the arm64 iOS Simulator..."
+xcodebuild     -project "$PROJECT"     -scheme AnnaWatchContainer     -destination "generic/platform=iOS Simulator"     -derivedDataPath "$DERIVED_DATA"     -skipMacroValidation     ARCHS=arm64     ONLY_ACTIVE_ARCH=YES     CODE_SIGNING_ALLOWED=NO     build
 
 echo "Build succeeded. The extracted project is at: $PROJECT"
 echo "Open it in Xcode, choose the AnnaWatchContainer scheme, select an iPhone simulator, and press Run."
