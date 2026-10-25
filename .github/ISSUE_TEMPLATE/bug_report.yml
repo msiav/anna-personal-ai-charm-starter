@@ -1,0 +1,43 @@
+name: Bug report
+description: Report a reproducible build or behavior problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Remove private paths, API keys, personal conversation text, and other sensitive data from logs.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+      placeholder: A clear, short description
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the exact steps that reproduce the issue.
+      placeholder: |
+        1. Open...
+        2. Tap...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include Xcode version, device or simulator, and iOS or watchOS version.
+      placeholder: Xcode 26.x, iPhone simulator, iOS 26.x
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant sanitized logs
+      description: Remove personal paths and private content. Never attach signing files, credentials, or model weights.
+      render: text
+    validations:
+      required: false
