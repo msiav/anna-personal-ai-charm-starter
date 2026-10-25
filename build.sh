@@ -25,6 +25,10 @@ DERIVED_DATA="$BUILD_ROOT/.build/DerivedData"
 
 unzip -q "$ARCHIVE" -d "$BUILD_ROOT"
 
+# The project was archived out of its original apps/watch directory, so its
+# shared-core references must be made relative to this flattened archive root.
+perl -pi -e 's{../../Sources/}{Sources/}g' "$PROJECT/project.pbxproj"
+
 XCODE_VERSION="$(xcodebuild -version | awk '/^Xcode / {print $2; exit}')"
 XCODE_MAJOR="${XCODE_VERSION%%.*}"
 if [[ "$XCODE_MAJOR" =~ ^[0-9]+$ ]] && (( XCODE_MAJOR >= 26 )); then
